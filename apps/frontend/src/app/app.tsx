@@ -1,16 +1,21 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
+import { VFC } from 'react';
+import { ThemeProvider, CssBaseline, useMediaQuery } from '@mui/material';
+import { DarkTheme, LightTheme } from '@nx-portafolio/ui';
+import { Routes } from 'apps/frontend/src/routes';
+import { BrowserRouter } from 'react-router-dom';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+export const App: VFC = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = prefersDarkMode ? DarkTheme : LightTheme;
 
-export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="frontend" />
-    </StyledApp>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
